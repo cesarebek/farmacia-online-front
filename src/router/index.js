@@ -12,11 +12,17 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: '/banco',
-      name: 'Banco',
+      path: '/shop',
+      name: 'Shop',
       meta: { requiresAuth: true },
       component: () =>
-        import(/* webpackChunkName: "login" */ '../views/Banco.vue'),
+        import(/* webpackChunkName: "shop" */ '../views/Shop.vue'),
+    },
+    {
+      path: '/contact',
+      name: 'Contact',
+      component: () =>
+        import(/* webpackChunkName: "contact" */ '../views/Contact.vue'),
     },
     {
       path: '/login',
@@ -36,6 +42,11 @@ const router = createRouter({
       path: '/about',
       name: 'About',
       component: () => import(/* webpackChunkName: "about" */ '../views/About'),
+    },
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: () => import(/* webpackChunkName: "cart" */ '../views/Cart'),
     },
     {
       path: '/:notFound(.*)',

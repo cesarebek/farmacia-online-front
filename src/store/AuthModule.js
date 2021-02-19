@@ -1,5 +1,4 @@
 import axios from '@/axios';
-import router from '@/router';
 
 const AuthModule = {
   state: {
@@ -19,11 +18,10 @@ const AuthModule = {
         email: payload.email,
         password: payload.password,
       });
-      console.log(res);
+      console.log(res.data);
       commit('setUser', { user: res.data.data, token: res.data.token });
       localStorage.setItem('access_token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.data));
-      router.replace('/');
     },
     //Sign up
     async register({ commit }, payload) {
@@ -59,7 +57,7 @@ const AuthModule = {
   },
   getters: {
     isAdmin(state) {
-      return state.user.roles[0].name;
+      return state.user;
     },
     isLogged(state) {
       return !!state.token;

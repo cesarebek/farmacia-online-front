@@ -63,6 +63,7 @@ export default {
           password: this.password,
         });
         console.log(this.isLogged);
+        this.$router.replace('Shop');
       } catch (e) {
         console.log(e);
       }
