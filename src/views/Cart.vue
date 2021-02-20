@@ -30,12 +30,14 @@
         <!-- Prodotti -->
 
         <CartItem
-          v-for="item in cartProducts"
+          v-for="(item, index) in cartProducts"
           :key="item.title"
           :title="item.title"
           :price="item.price"
           :quantity="item.quantity"
           :image="item.image"
+          :id="item.id"
+          :index="index"
         />
 
         <router-link
@@ -64,7 +66,10 @@
           <label class="font-medium inline-block mb-3 text-sm uppercase"
             >Spedizione</label
           >
-          <select class="block p-2 text-gray-600 w-full text-sm">
+          <select
+            class="block p-2 text-gray-600 w-full text-sm"
+            v-model="shipping"
+          >
             <option>Spedizione Standart - € 9.90</option>
             <option>Spedizione Espressa - € 15.90</option>
           </select>
@@ -75,7 +80,7 @@
             class="flex font-semibold justify-between py-6 text-sm uppercase"
           >
             <span>Totale</span>
-            <span>€ 300</span>
+            <span>€ {{ bigTotal }}</span>
           </div>
           <button
             class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full"
@@ -92,9 +97,20 @@
 import CartItem from '@/components/CartItem';
 export default {
   components: { CartItem },
+  data() {
+    return {
+      shipping: '',
+    };
+  },
   computed: {
     cartProducts() {
       return this.$store.getters.cartProducts;
+    },
+    cartAmount() {
+      return this.$store.getters.cartAmount;
+    },
+    bigTotal() {
+      return this.cartAmount + this.shipping;
     },
   },
 };
