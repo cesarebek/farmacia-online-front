@@ -8,7 +8,6 @@ const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      meta: { requiresAuth: true },
       component: Home,
     },
     {
@@ -17,6 +16,13 @@ const router = createRouter({
       meta: { requiresAuth: true },
       component: () =>
         import(/* webpackChunkName: "shop" */ '../views/Shop.vue'),
+    },
+    {
+      path: '/order-completed',
+      name: 'OrderCompleted',
+      meta: { requiresAuth: true },
+      component: () =>
+        import(/* webpackChunkName: "shop" */ '../views/OrderCompleted.vue'),
     },
     {
       path: '/contact',

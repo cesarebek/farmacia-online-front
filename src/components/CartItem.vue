@@ -1,12 +1,17 @@
 <template>
-  <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-    <div class="flex w-2/5">
+  <div
+    class="flex justify-around  items-center hover:bg-gray-100 -mx-8 px-6 py-5"
+  >
+    <div class="sm:flex sm:w-2/5">
       <div class="w-20">
         <img class="h-24" :src="image" alt="product" />
       </div>
       <div class="flex flex-col justify-between ml-4 flex-grow">
         <span class="font-bold text-sm">{{ title }}</span>
-        <button class="font-semibold hover:text-red-500 text-gray-500 text-xs">
+        <button
+          @click="deleteProductFromCart"
+          class="flex sm:block font-semibold hover:text-red-500 text-gray-500 text-xs"
+        >
           Rimuovi
         </button>
       </div>
@@ -34,14 +39,18 @@
         />
       </svg>
     </div>
-    <span class="text-center w-1/5 font-semibold text-sm">€ {{ price }}</span>
-    <span class="text-center w-1/5 font-semibold text-sm">€ {{ total }}</span>
+    <span class="hidden sm:block text-center w-1/5 font-semibold text-sm"
+      >€ {{ price }}</span
+    >
+    <span class="hidden sm:block text-center w-1/5 font-semibold text-sm"
+      >€ {{ total }}</span
+    >
   </div>
 </template>
 
 <script>
 export default {
-  props: ['title', 'quantity', 'price', 'image', 'id', 'index'],
+  props: ['title', 'quantity', 'price', 'image', 'id', 'index', 'stock'],
   computed: {
     total() {
       return this.quantity * this.price;
@@ -49,7 +58,7 @@ export default {
   },
   methods: {
     addItemQuantity() {
-      const product = { id: this.id };
+      const product = { id: this.id, stock: this.stock };
       this.$store.dispatch('addProductToCart', product);
     },
     removeProductFromCart() {
@@ -59,6 +68,12 @@ export default {
         index: this.index,
       };
       this.$store.dispatch('removeProductFromCart', product);
+    },
+    deleteProductFromCart() {
+      const product = {
+        index: this.index,
+      };
+      this.$store.dispatch('deleteProductFromCart', product);
     },
   },
 };

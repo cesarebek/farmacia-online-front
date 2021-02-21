@@ -11,8 +11,9 @@ const CategoriesModule = {
     },
     incrementItemQuantity(state, cartItem) {
       console.log('increment item quantity');
-      const item = state.cart.find((item) => item.id === cartItem.id);
+      const item = state.cart.find((item) => item.id == cartItem.id);
       item.quantity++;
+      // cartItem.quantity++;
     },
     decrementItemQuantity(state, cartItem) {
       console.log('decrement item quantity');
@@ -26,7 +27,7 @@ const CategoriesModule = {
   },
   actions: {
     addProductToCart({ getters, commit }, product) {
-      if (!product.stock > 0) {
+      if (product.stock > 0) {
         const cartItem = getters.cartProducts.find(
           (item) => item.id === product.id
         );
@@ -44,6 +45,9 @@ const CategoriesModule = {
         commit('removeItemFromCart', product);
       }
     },
+    deleteProductFromCart({ commit }, product) {
+      commit('removeItemFromCart', product);
+    },
   },
   getters: {
     cartProducts(state) {
@@ -55,6 +59,10 @@ const CategoriesModule = {
         total += product.price * product.quantity;
       });
       return total;
+    },
+    itemsCounter(state) {
+      let counter = state.cart.length;
+      return counter;
     },
   },
 };

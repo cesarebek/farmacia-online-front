@@ -34,16 +34,22 @@
 
 <script>
 export default {
-  props: ['price', 'title', 'image', 'id'],
+  props: ['price', 'title', 'image', 'id', 'stock'],
   methods: {
     addProductToCart() {
-      this.$store.dispatch('addProductToCart', {
+      const product = {
         id: this.id,
         title: this.title,
         price: this.price,
         image: this.image,
+        stock: this.stock,
         quantity: 1,
-      });
+      };
+      this.$store.dispatch('addProductToCart', product);
+    },
+    showid() {
+      console.log(this.id);
+      console.log(this.stock);
     },
   },
 };

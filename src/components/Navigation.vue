@@ -24,9 +24,13 @@
           </svg>
           <span class="mx-1 text-sm">UD</span>
         </div>
-        <div class="w-full text-gray-700 md:text-center text-2xl font-semibold">
-          Parafarmacia
-        </div>
+        <router-link to="/"
+          ><div
+            class="w-full text-gray-700 md:text-center text-2xl font-semibold"
+          >
+            Parafarmacia
+          </div></router-link
+        >
 
         <!-- ********* Register Link ********* -->
         <div class="flex items-center justify-end w-full space-x-3">
@@ -123,7 +127,7 @@
       </div>
       <nav
         :class="isOpen ? '' : 'hidden'"
-        class="sm:flex sm:justify-center sm:items-center mt-4"
+        class="sm:flex flex sm:justify-center justify-center text-center sm:items-center mt-4"
       >
         <div class="flex flex-col sm:flex-row">
           <router-link
@@ -185,6 +189,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isOpen: true,
+    };
+  },
   computed: {
     isLogged() {
       return this.$store.getters.isLogged;
