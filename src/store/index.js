@@ -3,6 +3,7 @@ import AuthModule from './AuthModule';
 import ProductsModule from './ProductsModule';
 import CategoriesModule from './CategoriesModule';
 import CartModule from './CartModule';
+import OrdersModule from './OrdersModule';
 
 export default createStore({
   state: {},
@@ -13,5 +14,6 @@ export default createStore({
     CategoriesModule,
     ProductsModule,
     CartModule,
+    OrdersModule,
   },
 });

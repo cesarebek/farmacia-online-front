@@ -194,9 +194,15 @@ export default {
       isOpen: false,
     };
   },
+  mounted() {
+    console.log(this.user);
+  },
   computed: {
     isLogged() {
       return this.$store.getters.isLogged;
+    },
+    isAdmin() {
+      return this.$store.getters.user.roles[0].name;
     },
   },
   methods: {

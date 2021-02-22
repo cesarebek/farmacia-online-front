@@ -37,7 +37,7 @@ const AuthModule = {
     },
     //Auto login
     tryLogin({ commit }) {
-      const user = localStorage.getItem('user');
+      const user = JSON.parse(localStorage.getItem('user'));
       const token = localStorage.getItem('access_token');
       commit('setUser', {
         user: user,

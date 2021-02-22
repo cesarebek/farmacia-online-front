@@ -25,6 +25,13 @@ const router = createRouter({
         import(/* webpackChunkName: "shop" */ '../views/OrderCompleted.vue'),
     },
     {
+      path: '/orders',
+      name: 'Orders',
+      meta: { requiresAuth: true },
+      component: () =>
+        import(/* webpackChunkName: "shop" */ '../views/Orders.vue'),
+    },
+    {
       path: '/contact',
       name: 'Contact',
       component: () =>

@@ -31,6 +31,7 @@
       <span class="text-gray-500 mt-2">€{{ price }}</span>
     </div>
     <ProductDetails
+      class="z-10"
       @close-details="detailsOpen = !detailsOpen"
       v-if="detailsOpen"
       :id="id"
