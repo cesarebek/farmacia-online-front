@@ -25,17 +25,8 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route);
-    if (Object.keys(this.$route.query).length !== 0) {
-      return (this.products = this.filterProducts);
-    } else {
-      return (this.products = this.allProducts);
-    }
-  },
-  updated() {
-    console.log(this.$route);
-    if (Object.keys(this.$route.query).length !== 0) {
-      return (this.products = this.filterProducts);
+    if (this.$route.query.category_id) {
+      return (this.products = this.getProductsByCategory);
     } else {
       return (this.products = this.allProducts);
     }
@@ -44,10 +35,10 @@ export default {
     allProducts() {
       return this.$store.getters.products;
     },
-    filterProducts() {
-      return this.allProducts.filter((product) => {
-        return product.category_id == this.$route.query.category_id;
-      });
+    getProductsByCategory() {
+      return this.$store.getters.getProductsByCategory(
+        this.$route.query.category_id
+      );
     },
   },
 };

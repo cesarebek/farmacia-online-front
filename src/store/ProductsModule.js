@@ -20,6 +20,13 @@ const ProductsModule = {
     products(state) {
       return state.products;
     },
+    //Specific product
+    getProductById: (state) => (id) => {
+      return state.products.find((product) => product.id === id);
+    },
+    getProductsByCategory: (state) => (id) => {
+      return state.products.filter((product) => product.category_id == id);
+    },
     // Products by category
     parafarmacia(state) {
       return state.products.filter((product) => {

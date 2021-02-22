@@ -3,11 +3,12 @@
     class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden flex-none"
   >
     <div
-      class="flex items-end justify-end h-56 w-full bg-cover"
+      @click="detailsOpen = !detailsOpen"
+      class="cursor-pointer flex items-end justify-end h-56 w-full bg-cover"
       :style="{ backgroundImage: `url(${image})` }"
     >
       <button
-        @click="addProductToCart"
+        @click.stop="addProductToCart"
         class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
       >
         <svg
@@ -29,12 +30,24 @@
       <h3 class="text-gray-700 uppercase">{{ title }}</h3>
       <span class="text-gray-500 mt-2">€{{ price }}</span>
     </div>
+    <ProductDetails
+      @close-details="detailsOpen = !detailsOpen"
+      v-if="detailsOpen"
+      :id="id"
+    />
   </div>
 </template>
 
 <script>
+import ProductDetails from '@/components/ProductDetails';
 export default {
   props: ['price', 'title', 'image', 'id', 'stock'],
+  data() {
+    return {
+      detailsOpen: false,
+    };
+  },
+  components: { ProductDetails },
   methods: {
     addProductToCart() {
       const product = {
