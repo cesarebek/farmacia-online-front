@@ -5,10 +5,7 @@ import CategoriesModule from './CategoriesModule';
 import CartModule from './CartModule';
 import OrdersModule from './OrdersModule';
 
-export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
+const store = createStore({
   modules: {
     AuthModule,
     CategoriesModule,
@@ -17,3 +14,5 @@ export default createStore({
     OrdersModule,
   },
 });
+
+export default store;

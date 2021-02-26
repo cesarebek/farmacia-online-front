@@ -1,7 +1,7 @@
 <template>
   <div
     @click.self="this.$emit('closeDetails')"
-    class="fixed inset-0 overflow-hidden flex justify-center items-center"
+    class="z-10 fixed inset-0 overflow-hidden flex justify-center items-center"
     style="background: rgba(0,0,0,.7);"
   >
     <div
@@ -42,7 +42,7 @@
                 <div class="rounded-lg bg-gray-100 flex py-2 px-3">
                   <span class="text-indigo-400 mr-1 mt-1">€</span>
                   <span class="font-bold text-indigo-600 text-3xl">{{
-                    product.price
+                    price
                   }}</span>
                 </div>
               </div>
@@ -81,6 +81,12 @@ export default {
   computed: {
     product() {
       return this.$store.getters.getProductById(this.id);
+    },
+    price() {
+      return new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(this.product.price);
     },
   },
   methods: {

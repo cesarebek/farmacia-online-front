@@ -110,7 +110,7 @@
 
           <div class="flex sm:hidden">
             <button
-              @click="isOpen = !isOpen"
+              @click="mobileMenuOpen = !mobileMenuOpen"
               type="button"
               class="text-gray-600 hover:text-gray-500 focus:outline-none focus:text-gray-500"
               aria-label="toggle menu"
@@ -126,7 +126,7 @@
         </div>
       </div>
       <nav
-        :class="isOpen ? '' : 'hidden'"
+        :class="mobileMenuOpen ? '' : 'hidden'"
         class="sm:flex flex sm:justify-center justify-center text-center sm:items-center mt-4"
       >
         <div class="flex flex-col sm:flex-row">
@@ -156,12 +156,66 @@
             class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
             >I miei ordini</router-link
           >
-          <router-link
-            v-if="isAdmin"
-            to="/orders"
-            class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-            >Amministrazione</router-link
+          <!-- This example requires Tailwind CSS v2.0+ -->
+          <div
+            v-if="isAdmin === 'super-admin'"
+            class="relative inline-block text-left"
           >
+            <div>
+              <button
+                @click="adminOpen = !adminOpen"
+                type="button"
+                class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0 flex items-center z-20"
+                id="options-menu"
+              >
+                Amministrazione
+                <svg
+                  class="-mr-1 ml-2 h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              v-if="adminOpen"
+              @click="adminOpen = !adminOpen"
+              class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"
+            >
+              <div
+                class="py-1"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="options-menu"
+              >
+                <router-link
+                  to="/admin/products"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                  >Prodotti</router-link
+                >
+                <router-link
+                  to="/admin/users"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                  >Utenti</router-link
+                >
+                <router-link
+                  to="/admin/orders"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                  >Ordini</router-link
+                >
+              </div>
+            </div>
+          </div>
         </div>
       </nav>
       <div class="relative mt-6 max-w-lg mx-auto">
@@ -191,18 +245,21 @@
 export default {
   data() {
     return {
-      isOpen: false,
+      mobileMenuOpen: false,
+      adminOpen: false,
     };
   },
   mounted() {
-    console.log(this.user);
+    console.log(this.$store.getters.user);
   },
   computed: {
     isLogged() {
       return this.$store.getters.isLogged;
     },
     isAdmin() {
-      return this.$store.getters.user.roles[0].name;
+      return this.$store.getters.user
+        ? this.$store.getters.user.roles[0].name
+        : false;
     },
   },
   methods: {

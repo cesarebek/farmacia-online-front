@@ -29,8 +29,39 @@ const router = createRouter({
       name: 'Orders',
       meta: { requiresAuth: true },
       component: () =>
-        import(/* webpackChunkName: "shop" */ '../views/Orders.vue'),
+        import(/* webpackChunkName: "orders" */ '../views/Orders.vue'),
     },
+    {
+      path: '/admin',
+      name: 'Admin',
+      meta: { requiresAuth: true },
+      component: () =>
+        import(/* webpackChunkName: "admin" */ '../views/Admin.vue'),
+      children: [
+        {
+          path: 'users',
+          component: () =>
+            import(
+              /* webpackChunkName: "UsersManagment" */ '../components/admin/users/Users.vue'
+            ),
+        },
+        {
+          path: 'orders',
+          component: () =>
+            import(
+              /* webpackChunkName: "OrdersManagment" */ '../components/admin/orders/OrdersManagment.vue'
+            ),
+        },
+        {
+          path: 'products',
+          component: () =>
+            import(
+              /* webpackChunkName: "ProductManagment" */ '../components/admin/products/ProductManagment.vue'
+            ),
+        },
+      ],
+    },
+
     {
       path: '/contact',
       name: 'Contact',

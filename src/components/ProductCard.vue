@@ -28,7 +28,7 @@
     </div>
     <div class="px-5 py-3">
       <h3 class="text-gray-700 uppercase">{{ title }}</h3>
-      <span class="text-gray-500 mt-2">€{{ price }}</span>
+      <span class="text-gray-500 mt-2">€{{ priceFormatted }}</span>
     </div>
     <ProductDetails
       class="z-10"
@@ -49,6 +49,14 @@ export default {
     };
   },
   components: { ProductDetails },
+  computed: {
+    priceFormatted() {
+      return new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(this.price);
+    },
+  },
   methods: {
     addProductToCart() {
       const product = {

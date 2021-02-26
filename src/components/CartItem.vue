@@ -53,7 +53,10 @@ export default {
   props: ['title', 'quantity', 'price', 'image', 'id', 'index', 'stock'],
   computed: {
     total() {
-      return this.quantity * this.price;
+      return new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(this.quantity * this.price);
     },
   },
   methods: {

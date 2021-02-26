@@ -6,6 +6,7 @@
         <div class="my-5 text-sm">
           <label for="username" class="block text-black">Nome</label>
           <input
+            v-model="name"
             id="username"
             type="text"
             autofocus
@@ -16,6 +17,7 @@
         <div class="my-5 text-sm">
           <label for="email" class="block text-black">Email</label>
           <input
+            v-model="email"
             id="email"
             type="text"
             autofocus
@@ -26,6 +28,7 @@
         <div class="my-5 text-sm">
           <label for="password" class="block text-black">Password</label>
           <input
+            v-model="password"
             id="password"
             type="password"
             class="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
@@ -37,6 +40,7 @@
             >Conferma Password</label
           >
           <input
+            v-model="confirmPass"
             id="confirm-pass"
             type="password"
             class="rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full"
@@ -45,6 +49,7 @@
         </div>
 
         <button
+          @click.prevent="signup"
           class="block text-center text-white bg-gray-800 p-3 duration-300 rounded-sm hover:bg-black w-full"
         >
           Registrati
@@ -73,7 +78,7 @@ export default {
     };
   },
   methods: {
-    register() {
+    signup() {
       if (this.password !== this.confirmPass) {
         return (this.error = 'La password di conferma è errata.');
       }

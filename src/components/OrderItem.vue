@@ -10,7 +10,7 @@
           </div>
           <div>
             <p class="uppercase">Totale</p>
-            <p>€ {{ amount }}</p>
+            <p>{{ amountFormatted }}</p>
           </div>
           <div class="hidden sm:block">
             <p class="uppercase">Invia a</p>
@@ -31,7 +31,6 @@
       </p>
 
       <OrderItemBody
-        class="mb-5"
         v-for="product in products"
         :key="product.id"
         :quantity="product.pivot.quantity"
@@ -58,15 +57,18 @@ import OrderItemBody from '@/components/OrderItemBody';
 export default {
   components: { OrderItemBody },
   props: ['products', 'dateRaw', 'id', 'amount'],
-  mounted() {
-    console.log(this.$store.getters.user);
-  },
   computed: {
     date() {
       return moment(this.dateRaw).format('D MMMM YYYY');
     },
     userName() {
       return this.$store.getters.user;
+    },
+    amountFormatted() {
+      return new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(this.amount);
     },
   },
 };

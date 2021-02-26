@@ -4,16 +4,20 @@ const AuthModule = {
   state: {
     user: null,
     token: null,
+    allUsers: [],
   },
   mutations: {
     setUser(state, payload) {
       state.user = payload.user;
       state.token = payload.token;
     },
+    setAllUsers(state, users) {
+      state.allUsers = users;
+    },
   },
   actions: {
     //Sign in
-    async login({ commit }, payload) {
+    async login({ commit, getters }, payload) {
       const res = await axios.post('/login', {
         email: payload.email,
         password: payload.password,
@@ -22,9 +26,11 @@ const AuthModule = {
       commit('setUser', { user: res.data.data, token: res.data.token });
       localStorage.setItem('access_token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.data));
+      axios.defaults.headers.common['Authorization'] =
+        'Bearer ' + getters.token;
     },
     //Sign up
-    async register({ commit }, payload) {
+    async register({ commit, getters }, payload) {
       const res = await axios.post('/register', {
         name: payload.name,
         email: payload.email,
@@ -34,15 +40,19 @@ const AuthModule = {
       commit('setUser', { user: res.data.data, token: res.data.token });
       localStorage.setItem('access_token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.data));
+      axios.defaults.headers.common['Authorization'] =
+        'Bearer ' + getters.token;
     },
     //Auto login
-    tryLogin({ commit }) {
+    tryLogin({ commit, getters }) {
       const user = JSON.parse(localStorage.getItem('user'));
       const token = localStorage.getItem('access_token');
       commit('setUser', {
         user: user,
         token: token,
       });
+      axios.defaults.headers.common['Authorization'] =
+        'Bearer ' + getters.token;
     },
     //Logout
     logout({ commit }) {
@@ -54,16 +64,26 @@ const AuthModule = {
       localStorage.removeItem('access_token');
       console.log('User logged-out!');
     },
+    async loadAllUsers({ commit, getters }) {
+      axios.defaults.headers.common['Authorization'] =
+        'Bearer ' + getters.token;
+      const res = await axios.get('users');
+      console.log(res.data.data);
+      commit('setAllUsers', res.data.data);
+    },
   },
   getters: {
-    isAdmin(state) {
-      return state.user;
-    },
     isLogged(state) {
       return !!state.token;
     },
     user(state) {
       return state.user;
+    },
+    token(state) {
+      return state.token;
+    },
+    getUserById: (state) => (id) => {
+      return state.allUsers.find((user) => user.id == id);
     },
   },
 };
