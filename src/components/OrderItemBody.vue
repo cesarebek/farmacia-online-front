@@ -5,7 +5,7 @@
     :id="id"
   />
   <div class="flex mb-5">
-    <img class="w-32 sm:w-48" :src="image" alt="immagine prodotto" />
+    <img class="w-32 h-44 sm:w-48" :src="image" alt="immagine prodotto" />
     <div class="ml-10">
       <p class="mb-3 text-xl font-semibold text-gray-700">
         {{ title }}

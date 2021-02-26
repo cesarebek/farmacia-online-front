@@ -12,18 +12,16 @@ const ProductsModule = {
   actions: {
     async loadProducts({ commit }) {
       const res = await axios.get('/products');
-      console.log(res.data);
       commit('setProducts', { products: res.data.data });
     },
     async updateProduct({ dispatch }, payload) {
       try {
-        const res = await axios.put(`/products/${payload.id}`, {
+        await axios.put(`/products/${payload.id}`, {
           title: payload.title,
           description: payload.description,
           price: payload.price,
           stock: payload.stock,
         });
-        console.log(res.data);
         dispatch('loadProducts');
       } catch (e) {
         console.log(e);
@@ -31,8 +29,15 @@ const ProductsModule = {
     },
     async newProduct({ dispatch }, product) {
       try {
-        const res = await axios.post(`/products/create`, product);
-        console.log(res.data.message);
+        await axios.post(`/products/create`, product);
+        dispatch('loadProducts');
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async deleteProduct({ dispatch }, id) {
+      try {
+        await axios.delete(`/products/${id}`);
         dispatch('loadProducts');
       } catch (e) {
         console.log(e);

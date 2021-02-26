@@ -23,9 +23,7 @@ import OrderItem from '@/components/OrderItem';
 export default {
   components: { OrderItem },
   async created() {
-    const res = await this.$axios.get('/orders/user-orders');
-    console.log(res.data.data);
-    this.$store.dispatch('loadUserOrders', res.data.data);
+    this.$store.dispatch('loadUserOrders');
   },
   computed: {
     orders() {

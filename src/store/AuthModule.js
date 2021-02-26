@@ -79,6 +79,9 @@ const AuthModule = {
     user(state) {
       return state.user;
     },
+    allUsers(state) {
+      return state.allUsers;
+    },
     token(state) {
       return state.token;
     },

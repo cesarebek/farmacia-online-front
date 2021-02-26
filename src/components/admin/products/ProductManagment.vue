@@ -1,9 +1,11 @@
 <template>
   <NewProduct v-if="newProductOpen" @close-details="newProductOpen = false" />
-  <div class="mb-7 flex justify-center">
+  <p class="font-bold text-2xl text-gray-700 my-2">Gestion Ordini</p>
+
+  <div class="mb-5 flex justify-center">
     <button
       @click="newProductOpen = !newProductOpen"
-      class="p-2 rounded-full bg-blue-600 text-white mx-5 hover:bg-blue-500 focus:outline-none focus:bg-blue-500 shadow-md"
+      class="p-3 rounded-full bg-blue-600 text-white mx-5 hover:bg-blue-500 focus:outline-none focus:bg-blue-500 shadow-md"
     >
       Aggiungi un nuovo prodotto
     </button>

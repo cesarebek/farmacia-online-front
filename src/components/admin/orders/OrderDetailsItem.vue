@@ -1,6 +1,6 @@
 <template>
   <div class="flex my-5 bg-gray-100 rounded-lg overflow-hidden">
-    <img class="w-32 sm:w-48" :src="image" alt="immagine prodotto" />
+    <img class="w-32 h-44 sm:w-48" :src="image" alt="immagine prodotto" />
     <div class="ml-5 mt-2">
       <p class="mb-3 text-xl font-semibold text-gray-700">
         {{ title }}

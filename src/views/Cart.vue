@@ -1,8 +1,6 @@
 <template>
   <div class="container mx-auto mt-10">
     <div class="flex flex-col md:flex-row shadow-md my-10">
-      <!--  -->
-
       <div class="w-full md:w-3/4 bg-white px-10 py-10">
         <div class="flex justify-between border-b pb-8">
           <h1 class="font-semibold text-2xl">Carrello</h1>
@@ -82,8 +80,11 @@
             class="block p-2 text-gray-600 w-full text-sm"
             v-model="shipping"
           >
-            <option value="9.90">Spedizione Standart - € 9.90</option>
-            <option value="15.90">Spedizione Espressa - € 15.90</option>
+            <option value="0.00" selected>Spedizione Gratuita - € 0.00</option>
+            <option value="9.90" disabled>Spedizione Standart - € 9.90</option>
+            <option value="15.90" disabled
+              >Spedizione Espressa - € 15.90</option
+            >
           </select>
         </div>
 

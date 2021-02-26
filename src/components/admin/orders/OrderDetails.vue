@@ -38,6 +38,14 @@
         :image="product.product_image"
         :price="product.price"
       />
+      <div class="flex justify-end">
+        <button
+          @click="deleteOrder"
+          class="mb-5 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Elimina questo ordine
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +68,11 @@ export default {
     },
     creation() {
       return moment(this.order.created_at).format('D MMMM YYYY');
+    },
+  },
+  methods: {
+    async deleteOrder() {
+      await this.$store.dispatch('deleteOrder', this.id);
     },
   },
 };

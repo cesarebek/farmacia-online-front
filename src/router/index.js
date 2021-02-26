@@ -42,7 +42,7 @@ const router = createRouter({
           path: 'users',
           component: () =>
             import(
-              /* webpackChunkName: "UsersManagment" */ '../components/admin/users/Users.vue'
+              /* webpackChunkName: "UsersManagment" */ '../components/admin/users/UsersManagment.vue'
             ),
         },
         {
