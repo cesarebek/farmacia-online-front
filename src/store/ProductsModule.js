@@ -53,7 +53,7 @@ const ProductsModule = {
       return state.products.find((product) => product.id == id);
     },
     getProductsByCategory: (state) => (id) => {
-      return state.products.find((product) => product.category_id == id);
+      return state.products.filter((product) => product.category_id == id);
     },
     parafarmacia(state) {
       return state.products.filter((product) => {

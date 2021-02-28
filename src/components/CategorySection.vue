@@ -5,12 +5,14 @@
 
       <div
         class="h-64 rounded-md overflow-hidden bg-cover bg-center md:col-span-2"
-        style="background-image: url('https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&q=144')"
+        :style="{ backgroundImage: `url(${farmaciaImg})` }"
       >
         <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
           <div class="px-10 max-w-xl">
-            <h2 class="text-2xl text-white font-semibold">Parafarmacia</h2>
-            <p class="mt-2 text-gray-400">
+            <h2 class="text-2xl text-white font-semibold text-shadow-md">
+              Parafarmacia
+            </h2>
+            <p class="mt-2 text-gray-100">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore
               facere provident molestias ipsam sint voluptatum pariatur.
             </p>
@@ -44,12 +46,14 @@
 
       <div
         class="h-64 rounded-md overflow-hidden bg-cover bg-center"
-        style="background-image: url('https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&q=144')"
+        :style="{ backgroundImage: `url(${integratoriImg})` }"
       >
         <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
           <div class="px-10 max-w-xl">
-            <h2 class="text-2xl text-white font-semibold">Integratori</h2>
-            <p class="mt-2 text-gray-400">
+            <h2 class="text-2xl text-white font-semibold text-shadow-md">
+              Integratori
+            </h2>
+            <p class="mt-2 text-gray-100">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore
               facere provident molestias ipsam sint voluptatum pariatur.
             </p>
@@ -81,12 +85,14 @@
       <!-- ********** CATEGORY 3 ********** -->
       <div
         class="h-64 rounded-md overflow-hidden bg-cover bg-center"
-        style="background-image: url('https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&q=144')"
+        :style="{ backgroundImage: `url(${cosmesiImg})` }"
       >
         <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
           <div class="px-10 max-w-xl">
-            <h2 class="text-2xl text-white font-semibold">Cosmetica</h2>
-            <p class="mt-2 text-gray-400">
+            <h2 class="text-2xl text-white font-semibold text-shadow-md">
+              Cosmetica
+            </h2>
+            <p class="mt-2 text-gray-100">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore
               facere provident molestias ipsam sint voluptatum pariatur.
             </p>
@@ -120,7 +126,17 @@
 </template>
 
 <script>
+import farmaciaImg from '@/assets/images/farmacia.jpg';
+import cosmesiImg from '@/assets/images/cosmesi.jpeg';
+import integratoriImg from '@/assets/images/integratori.jpg';
 export default {
+  data() {
+    return {
+      farmaciaImg: farmaciaImg,
+      cosmesiImg: cosmesiImg,
+      integratoriImg: integratoriImg,
+    };
+  },
   computed: {
     categories() {
       return this.$store.getters.categories;

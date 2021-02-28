@@ -19,6 +19,10 @@ const CategoriesModule = {
     categories(state) {
       return state.categories;
     },
+
+    getNameCategoryById: (state) => (id) => {
+      return state.categories.find((category) => category.id == id);
+    },
   },
 };
 

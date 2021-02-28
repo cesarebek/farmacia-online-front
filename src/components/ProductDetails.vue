@@ -2,10 +2,10 @@
   <div
     @click.self="this.$emit('closeDetails')"
     class="z-10 fixed inset-0 overflow-hidden flex justify-center items-center"
-    style="background: rgba(0,0,0,.7);"
+    style="background: rgba(0,0,0,.75);"
   >
     <div
-      class=" w-4/5 md:w-3/5 shadow-lg bg-white md:p-10 mx-auto rounded-2xl overflow-y-auto"
+      class=" w-4/5 h-3/4  md:w-3/5 shadow-lg bg-white md:p-10 mx-auto rounded-2xl overflow-y-auto"
     >
       <div class="modal-content py-4 text-left px-6">
         <!--Title-->
@@ -28,9 +28,8 @@
         </div>
         <!--Body-->
         <div class="my-5 lg:flex lg:place-items-start">
-          <div class="w-full lg:w-1/2">
-            <img :src="product.product_image" alt="" />
-          </div>
+          <img class="w-full lg:w-1/2" :src="product.product_image" alt="" />
+
           <div class="mt-5 lg:mt-0 text-lg lg:ml-16">
             <p
               class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl"
@@ -88,9 +87,15 @@ export default {
         currency: 'EUR',
       }).format(this.product.price);
     },
+    isLogged() {
+      return this.$store.getters.isLogged;
+    },
   },
   methods: {
     addToCart() {
+      if (!this.isLogged) {
+        return this.$router.push('login');
+      }
       const product = {
         id: this.id,
         title: this.product.title,

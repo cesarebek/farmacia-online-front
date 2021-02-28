@@ -1,5 +1,16 @@
 <template>
   <div class="container mx-auto min-h-screen">
+    <div class="flex items-center justify-between m-5" v-if="isQuery">
+      <p class="text-2xl font-semibold text-gray-700">
+        Stai visitando la categoria
+        <span class="text-indigo-700 font-bold">{{ categoryName }}</span>
+      </p>
+      <router-link
+        to="/"
+        class="px-6 py-3 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white"
+        >Torna alle categorie</router-link
+      >
+    </div>
     <div class="grid mx-5 md:grid-cols-3 gap-5">
       <ProductCard
         v-for="product in products"
@@ -22,12 +33,15 @@ export default {
   data() {
     return {
       products: [],
+      isQuery: null,
     };
   },
   mounted() {
     if (this.$route.query.category_id) {
+      this.isQuery = this.$route.query.category_id;
       return (this.products = this.getProductsByCategory);
     } else {
+      this.isQuery = null;
       return (this.products = this.allProducts);
     }
   },
@@ -39,6 +53,9 @@ export default {
       return this.$store.getters.getProductsByCategory(
         this.$route.query.category_id
       );
+    },
+    categoryName() {
+      return this.$store.getters.getNameCategoryById(this.isQuery).name;
     },
   },
 };

@@ -36,7 +36,6 @@ const AuthModule = {
         email: payload.email,
         password: payload.password,
       });
-      console.log(res);
       commit('setUser', { user: res.data.data, token: res.data.token });
       localStorage.setItem('access_token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.data));
@@ -68,7 +67,6 @@ const AuthModule = {
       axios.defaults.headers.common['Authorization'] =
         'Bearer ' + getters.token;
       const res = await axios.get('users');
-      console.log(res.data.data);
       commit('setAllUsers', res.data.data);
     },
   },

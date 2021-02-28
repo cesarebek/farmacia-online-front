@@ -1,54 +1,91 @@
 <template>
-  <!-- This example requires Tailwind CSS v2.0+ -->
-  <div class="relative bg-white overflow-hidden">
-    <div class="max-w-7xl mx-auto">
-      <div
-        class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32"
-      >
-        <svg
-          class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
-          fill="currentColor"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <polygon points="50,0 100,0 50,100 0,100" />
-        </svg>
+  <div class="container mx-auto">
+    <div class="flex flex-col items-center space-y-10">
+      <div class="w-3/4 md:w-1/2 text-center text-gray-600 font-medium text-xl">
+        <p>
+          Contatta i nostri farmacisti utilizzando il form qui sotto. La voglia
+          di soddisfare i nostri clienti è ciò che più ci contraddistingue.
+        </p>
+        <p class="mt-1 text-sm">Ti risponderemo entro 24h!</p>
+      </div>
 
-        <div class="relative pt-6 px-4 sm:px-6 lg:px-8"></div>
-
-        <div
-          class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
-        ></div>
-
-        <main
-          class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28"
-        >
-          <div class="sm:text-center lg:text-left">
-            <h1
-              class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl"
+      <!-- Form -->
+      <form class="max-w-lg mx-10 md:mx-0">
+        <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-first-name"
             >
-              <span class="block xl:inline">Qualche dubbio sulla</span>
-              <span class="block text-indigo-600 xl:inline">
-                terapia da seguire?</span
-              >
-            </h1>
-            <p
-              class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
-            >
-              Contattaci attraverso il form qui sotto dedicato per avere il
-              supporto dei nostri farmacisti su parafarmaci ed integratori.
+              Nome
+            </label>
+            <input
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              id="grid-first-name"
+              type="text"
+              placeholder="Mario"
+            />
+            <p class="text-red-500 text-xs italic">
+              Please fill out this field.
             </p>
           </div>
-        </main>
-      </div>
-    </div>
-    <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-      <img
-        class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-        src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
-        alt=""
-      />
+          <div class="w-full md:w-1/2 px-3">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-last-name"
+            >
+              Cognome
+            </label>
+            <input
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="grid-last-name"
+              type="text"
+              placeholder="Rossi"
+            />
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full px-3">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-password"
+            >
+              E-mail
+            </label>
+            <input
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              id="email"
+              type="email"
+              placeholder="mariorossi@gmail.com"
+            />
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full px-3">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-password"
+            >
+              Messaggio
+            </label>
+            <textarea
+              class=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
+              id="message"
+            ></textarea>
+          </div>
+        </div>
+        <div class="md:flex md:items-center">
+          <div class="md:w-1/3">
+            <button
+              class="bg-indigo-500 shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              type="button"
+            >
+              Invia
+            </button>
+          </div>
+          <div class="md:w-2/3"></div>
+        </div>
+      </form>
     </div>
   </div>
 </template>

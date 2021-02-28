@@ -4,10 +4,11 @@
   >
     <div
       @click="detailsOpen = !detailsOpen"
-      class="cursor-pointer flex items-end justify-end h-56 w-full bg-cover"
+      class="cursor-pointer flex items-end justify-end h-56 w-full bg-cover bg-center"
       :style="{ backgroundImage: `url(${image})` }"
     >
       <button
+        v-if="isLogged"
         @click.stop="addProductToCart"
         class="p-2 rounded-full bg-blue-600 text-white mx-5 -mb-4 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
       >
@@ -55,6 +56,9 @@ export default {
         style: 'currency',
         currency: 'EUR',
       }).format(this.price);
+    },
+    isLogged() {
+      return this.$store.getters.isLogged;
     },
   },
   methods: {

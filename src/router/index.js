@@ -13,7 +13,6 @@ const router = createRouter({
     {
       path: '/shop',
       name: 'Shop',
-      meta: { requiresAuth: true },
       component: () =>
         import(/* webpackChunkName: "shop" */ '../views/Shop.vue'),
     },
@@ -61,6 +60,11 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/about',
+      name: 'About',
+      component: () => import(/* webpackChunkName: "about" */ '../views/About'),
+    },
 
     {
       path: '/contact',
@@ -81,11 +85,6 @@ const router = createRouter({
       meta: { requiresUnauth: true },
       component: () =>
         import(/* webpackChunkName: "register" */ '../views/Register'),
-    },
-    {
-      path: '/about',
-      name: 'About',
-      component: () => import(/* webpackChunkName: "about" */ '../views/About'),
     },
     {
       path: '/cart',

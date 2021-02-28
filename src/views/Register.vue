@@ -62,6 +62,12 @@
           Accedi ora!
         </router-link>
       </p>
+      <p
+        class="mt-4 text-gray-800 border border-gray-800 bg-gray-100 rounded-lg text-center p-3"
+        v-if="message"
+      >
+        {{ message }}
+      </p>
     </div>
   </div>
 </template>
@@ -74,23 +80,29 @@ export default {
       email: '',
       password: '',
       confirmPass: '',
-      error: '',
+      message: '',
     };
   },
   methods: {
-    signup() {
+    async signup() {
+      this.message = null;
+      if (!this.email || !this.password || !this.confirmPass || !this.name) {
+        return (this.message =
+          'Prima di proseguire, completa tutti i campi richiesti.');
+      }
       if (this.password !== this.confirmPass) {
         return (this.error = 'La password di conferma è errata.');
       }
       try {
-        this.$store.dispatch('register', {
+        await this.$store.dispatch('register', {
           name: this.name,
           email: this.email,
           password: this.password,
         });
-        this.$router.replace('/');
+        this.$router.replace('/shop');
       } catch (e) {
         console.log(e);
+        this.message = e.response.data.message;
       }
     },
   },

@@ -18,9 +18,6 @@
           <div class="text-sm font-medium text-gray-900">
             {{ product.title }}
           </div>
-          <div class="text-sm text-gray-500">
-            jane.cooper@example.com
-          </div>
         </div>
       </div>
     </td>

@@ -37,6 +37,12 @@
           Registrati ora!
         </router-link>
       </p>
+      <p
+        class="mt-4 text-gray-800 border border-gray-800 bg-gray-100 rounded-lg text-center p-3"
+        v-if="message"
+      >
+        {{ message }}
+      </p>
     </div>
   </div>
 </template>
@@ -47,25 +53,31 @@ export default {
     return {
       email: '',
       password: '',
+      message: null,
     };
   },
   computed: {
     isLogged() {
       return this.$store.getters.isLogged;
     },
+    userError() {
+      return this.$store.getters.userError;
+    },
   },
   methods: {
     async login() {
+      this.message = null;
+      if (!this.email || !this.password) {
+        return (this.message = 'Before login, please insert the credentials.');
+      }
       try {
-        console.log(this.isLogged);
         await this.$store.dispatch('login', {
           email: this.email,
           password: this.password,
         });
-        console.log(this.isLogged);
-        this.$router.replace('Shop');
+        this.$router.replace('/shop');
       } catch (e) {
-        console.log(e);
+        this.message = e.response.data.message;
       }
     },
   },

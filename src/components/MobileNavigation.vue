@@ -98,3 +98,10 @@
     </router-link>
   </div>
 </template>
+
+<style scoped>
+a.router-link-exact-active {
+  color: #6366f1;
+  text-decoration: none;
+}
+</style>
