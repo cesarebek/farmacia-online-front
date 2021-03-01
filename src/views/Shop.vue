@@ -12,15 +12,17 @@
       >
     </div>
     <div class="grid mx-5 md:grid-cols-3 gap-5">
-      <ProductCard
-        v-for="product in products"
-        :key="product.id"
-        :title="product.title"
-        :price="product.price"
-        :image="product.product_image"
-        :id="product.id"
-        :stock="product.stock"
-      />
+      <transition-group name="product" mode="out-in">
+        <ProductCard
+          v-for="product in products"
+          :key="product.id"
+          :title="product.title"
+          :price="product.price"
+          :image="product.product_image"
+          :id="product.id"
+          :stock="product.stock"
+        />
+      </transition-group>
     </div>
   </div>
 </template>
@@ -60,3 +62,30 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* Animations */
+.product-enter-from {
+  opacity: 0;
+  transform: scale(1.1);
+}
+.product-enter-active {
+  transition: all 0.3s ease-out;
+}
+.product-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.product-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+.product-leave-active {
+  transition: all 0.3s ease-in;
+}
+.product-leave-to {
+  opacity: 0;
+  transform: scale(1.1);
+}
+</style>

@@ -5,14 +5,19 @@ const AuthModule = {
     user: null,
     token: null,
     allUsers: [],
+    userMessage: null,
   },
   mutations: {
     setUser(state, payload) {
       state.user = payload.user;
       state.token = payload.token;
+      state.userMessage = payload.message;
     },
     setAllUsers(state, users) {
       state.allUsers = users;
+    },
+    resetUserMessage(state) {
+      state.userMessage = null;
     },
   },
   actions: {
@@ -22,8 +27,12 @@ const AuthModule = {
         email: payload.email,
         password: payload.password,
       });
-      console.log(res.data);
-      commit('setUser', { user: res.data.data, token: res.data.token });
+      console.log(res);
+      commit('setUser', {
+        user: res.data.data,
+        token: res.data.token,
+        message: res.data.message,
+      });
       localStorage.setItem('access_token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.data));
       axios.defaults.headers.common['Authorization'] =
@@ -36,7 +45,12 @@ const AuthModule = {
         email: payload.email,
         password: payload.password,
       });
-      commit('setUser', { user: res.data.data, token: res.data.token });
+      console.log(res);
+      commit('setUser', {
+        user: res.data.data,
+        token: res.data.token,
+        message: res.data.message,
+      });
       localStorage.setItem('access_token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.data));
       axios.defaults.headers.common['Authorization'] =
@@ -69,6 +83,9 @@ const AuthModule = {
       const res = await axios.get('users');
       commit('setAllUsers', res.data.data);
     },
+    resetUserMessage({ commit }) {
+      commit('resetUserMessage');
+    },
   },
   getters: {
     isLogged(state) {
@@ -82,6 +99,9 @@ const AuthModule = {
     },
     token(state) {
       return state.token;
+    },
+    userMessage(state) {
+      return state.userMessage;
     },
     getUserById: (state) => (id) => {
       return state.allUsers.find((user) => user.id == id);

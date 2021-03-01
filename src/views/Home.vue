@@ -1,7 +1,9 @@
 <template>
-  <HomeBanner />
-  <CategorySection />
-  <ContactSection />
+  <div>
+    <HomeBanner />
+    <CategorySection />
+    <ContactSection />
+  </div>
 </template>
 
 <script>

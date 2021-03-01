@@ -20,6 +20,7 @@
               Nome
             </label>
             <input
+              v-model="name"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="grid-first-name"
               type="text"
@@ -37,6 +38,7 @@
               Cognome
             </label>
             <input
+              v-model="surname"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="grid-last-name"
               type="text"
@@ -53,6 +55,7 @@
               E-mail
             </label>
             <input
+              v-model="email"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="email"
               type="email"
@@ -69,6 +72,7 @@
               Messaggio
             </label>
             <textarea
+              v-model="message"
               class=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
               id="message"
             ></textarea>
@@ -77,6 +81,7 @@
         <div class="md:flex md:items-center">
           <div class="md:w-1/3">
             <button
+              @click="newMessage"
               class="bg-indigo-500 shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
               type="button"
             >
@@ -89,3 +94,27 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: '',
+      surname: '',
+      email: '',
+      message: '',
+    };
+  },
+  methods: {
+    async newMessage() {
+      const message = {
+        name: this.name,
+        surname: this.surname,
+        email: this.email,
+        message: this.message,
+      };
+      await this.$store.dispatch('newMessage', message);
+    },
+  },
+};
+</script>

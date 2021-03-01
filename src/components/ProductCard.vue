@@ -31,12 +31,13 @@
       <h3 class="text-gray-700 uppercase">{{ title }}</h3>
       <span class="text-gray-500 mt-2">€{{ priceFormatted }}</span>
     </div>
-    <ProductDetails
-      class="z-10"
-      @close-details="detailsOpen = !detailsOpen"
-      v-if="detailsOpen"
-      :id="id"
-    />
+    <transition-group name="product">
+      <ProductDetails
+        @close-details="detailsOpen = !detailsOpen"
+        v-if="detailsOpen"
+        :id="id"
+      />
+    </transition-group>
   </div>
 </template>
 
@@ -80,3 +81,30 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* Animations */
+.product-enter-from {
+  opacity: 0;
+  transform: scale(1.1);
+}
+.product-enter-active {
+  transition: all 0.5s ease-out;
+}
+.product-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.product-leave-to {
+  opacity: 0;
+  transform: scale(1.1);
+}
+.product-leave-active {
+  transition: all 0.3s ease-in;
+}
+.product-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+</style>

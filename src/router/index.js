@@ -58,6 +58,13 @@ const router = createRouter({
               /* webpackChunkName: "ProductManagment" */ '../components/admin/products/ProductManagment.vue'
             ),
         },
+        {
+          path: 'messages',
+          component: () =>
+            import(
+              /* webpackChunkName: "ProductManagment" */ '../components/admin/messages/MessageManagment.vue'
+            ),
+        },
       ],
     },
     {

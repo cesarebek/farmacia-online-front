@@ -196,6 +196,7 @@ export default {
       data.append('product_image', this.image);
 
       await this.$store.dispatch('newProduct', data);
+      this.$emit('closeDetails');
     },
   },
 };

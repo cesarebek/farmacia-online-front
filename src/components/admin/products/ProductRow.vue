@@ -1,9 +1,11 @@
 <template>
-  <ProductUpdate
-    @close-details="updateOpen = !updateOpen"
-    v-if="updateOpen"
-    :product="product"
-  />
+  <transition-group name="product">
+    <ProductUpdate
+      @close-details="updateOpen = !updateOpen"
+      v-if="updateOpen"
+      :product="product"
+    />
+  </transition-group>
   <tr>
     <td class="px-6 py-4 whitespace-nowrap">
       <div class="flex items-center">
@@ -62,11 +64,38 @@ export default {
       return this.$store.getters.getProductById(this.id);
     },
     lastChange() {
-      return moment(this.product.updated_at).format('D MMMM YYYY');
+      return moment(this.product.updated_at).format('D MMMM YYYY, HH:mm');
     },
     creation() {
-      return moment(this.product.created_at).format('D MMMM YYYY');
+      return moment(this.product.created_at).format('D MMMM YYYY, HH:mm');
     },
   },
 };
 </script>
+
+<style scoped>
+/* Animations */
+.product-enter-from {
+  opacity: 0;
+  transform: scale(1.1);
+}
+.product-enter-active {
+  transition: all 0.5s ease-out;
+}
+.product-enter-to {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.product-leave-to {
+  opacity: 0;
+  transform: scale(1.1);
+}
+.product-leave-active {
+  transition: all 0.3s ease-in;
+}
+.product-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+</style>

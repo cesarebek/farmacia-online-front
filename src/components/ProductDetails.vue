@@ -7,7 +7,7 @@
     <div
       class=" w-4/5 h-3/4  md:w-3/5 shadow-lg bg-white md:p-10 mx-auto rounded-2xl overflow-y-auto"
     >
-      <div class="modal-content py-4 text-left px-6">
+      <div class="py-4 text-left px-6">
         <!--Title-->
         <div class="flex justify-between items-center pb-3">
           <p class="text-md text-gray-500">Dettagli prodotto</p>
@@ -64,11 +64,7 @@
               Ultimi {{ product.stock }} rimasti
             </p>
           </div>
-
-          <div></div>
         </div>
-        <!--Footer-->
-        <div class="flex justify-end pt-2"></div>
       </div>
     </div>
   </div>

@@ -62,12 +62,15 @@
           Accedi ora!
         </router-link>
       </p>
-      <p
-        class="mt-4 text-gray-800 border border-gray-800 bg-gray-100 rounded-lg text-center p-3"
-        v-if="message"
-      >
-        {{ message }}
-      </p>
+      <teleport to="body">
+        <base-toast
+          v-if="message"
+          class="absolute top-10 right-10"
+          @reset-message="resetMessage"
+        >
+          {{ message }}
+        </base-toast>
+      </teleport>
     </div>
   </div>
 </template>
@@ -91,7 +94,7 @@ export default {
           'Prima di proseguire, completa tutti i campi richiesti.');
       }
       if (this.password !== this.confirmPass) {
-        return (this.error = 'La password di conferma è errata.');
+        return (this.message = 'La password di conferma è errata.');
       }
       try {
         await this.$store.dispatch('register', {
@@ -99,11 +102,15 @@ export default {
           email: this.email,
           password: this.password,
         });
-        this.$router.replace('/shop');
+        this.$router.replace('/');
       } catch (e) {
         console.log(e);
         this.message = e.response.data.message;
       }
+    },
+    resetMessage() {
+      this.$store.dispatch('resetUserMessage');
+      this.message = null;
     },
   },
 };

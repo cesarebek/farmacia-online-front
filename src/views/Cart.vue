@@ -70,7 +70,7 @@
           <span class="font-semibold text-sm uppercase">
             {{ itemsCounter }} {{ wordItem }}</span
           >
-          <span class="font-semibold text-sm">{{ cartAmount }} €</span>
+          <span class="font-semibold text-sm">{{ cartAmount }} </span>
         </div>
         <div>
           <label class="font-medium inline-block mb-3 text-sm uppercase"
@@ -80,11 +80,8 @@
             class="block p-2 text-gray-600 w-full text-sm"
             v-model="shipping"
           >
-            <option value="0.00" selected>Spedizione Gratuita - € 0.00</option>
-            <option value="9.90" disabled>Spedizione Standart - € 9.90</option>
-            <option value="15.90" disabled
-              >Spedizione Espressa - € 15.90</option
-            >
+            <option value="14.0">Spedizione Express - € 14.90</option>
+            <option value="9.90">Spedizione Standart - € 9.90</option>
           </select>
         </div>
 
@@ -93,7 +90,7 @@
             class="flex font-semibold justify-between py-6 text-sm uppercase"
           >
             <span>Totale</span>
-            <span>€ {{ bigTotal }}</span>
+            <span>{{ bigTotal }}</span>
           </div>
           <button
             :disabled="completeOrder"
@@ -124,13 +121,16 @@ export default {
       return this.$store.getters.cartProducts;
     },
     cartAmount() {
-      return this.$store.getters.cartAmount;
+      return new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(this.$store.getters.cartAmount);
     },
     itemsCounter() {
       return this.$store.getters.itemsCounter;
     },
     bigTotal() {
-      return this.cartAmount + parseInt(this.shipping);
+      return parseFloat(this.cartAmount) + parseFloat(this.shipping);
     },
     wordItem() {
       return this.itemsCounter === 1 ? 'Prodotto' : 'Prodotti';
@@ -150,6 +150,7 @@ export default {
       const res = await this.$axios.post('/orders/new', { cart: order });
       console.log(res);
       this.$router.replace('/order-completed');
+      this.$store.dispatch('resetCart');
     },
   },
 };

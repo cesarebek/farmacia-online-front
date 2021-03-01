@@ -1,6 +1,6 @@
 <template>
-  <p class="font-bold text-2xl text-gray-700 my-4">Gestion Ordini</p>
   <div class="flex flex-col">
+    <p class="font-bold text-2xl text-gray-700 my-4">Gestione Ordini</p>
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div

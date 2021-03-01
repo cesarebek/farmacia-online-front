@@ -3,10 +3,17 @@ import axios from '@/axios';
 const ProductsModule = {
   state: {
     products: [],
+    prodcutMessage: null,
   },
   mutations: {
     setProducts(state, payload) {
       state.products = payload.products;
+    },
+    setProductMessage(state, message) {
+      state.productMessage = message;
+    },
+    resetProductMessage(state) {
+      state.productMessage = null;
     },
   },
   actions: {
@@ -14,39 +21,37 @@ const ProductsModule = {
       const res = await axios.get('/products');
       commit('setProducts', { products: res.data.data });
     },
-    async updateProduct({ dispatch }, payload) {
-      try {
-        await axios.put(`/products/${payload.id}`, {
-          title: payload.title,
-          description: payload.description,
-          price: payload.price,
-          stock: payload.stock,
-        });
-        dispatch('loadProducts');
-      } catch (e) {
-        console.log(e);
-      }
+    async updateProduct({ dispatch, commit }, payload) {
+      const res = await axios.put(`/products/${payload.id}`, {
+        title: payload.title,
+        description: payload.description,
+        price: payload.price,
+        stock: payload.stock,
+      });
+      console.log(res.data);
+      commit('setProductMessage', res.data.message);
+      dispatch('loadProducts');
     },
-    async newProduct({ dispatch }, product) {
-      try {
-        await axios.post(`/products/create`, product);
-        dispatch('loadProducts');
-      } catch (e) {
-        console.log(e);
-      }
+    async newProduct({ dispatch, commit }, product) {
+      const res = await axios.post(`/products/create`, product);
+      commit('setProductMessage', res.data.message);
+      dispatch('loadProducts');
     },
-    async deleteProduct({ dispatch }, id) {
-      try {
-        await axios.delete(`/products/${id}`);
-        dispatch('loadProducts');
-      } catch (e) {
-        console.log(e);
-      }
+    async deleteProduct({ dispatch, commit }, id) {
+      const res = await axios.delete(`/products/${id}`);
+      commit('setProductMessage', res.data.message);
+      dispatch('loadProducts');
+    },
+    resetProductMessage({ commit }) {
+      commit('resetProductMessage');
     },
   },
   getters: {
     products(state) {
       return state.products;
+    },
+    productMessage(state) {
+      return state.productMessage;
     },
     //Specific product
     getProductById: (state) => (id) => {

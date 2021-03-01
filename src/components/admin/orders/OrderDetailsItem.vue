@@ -6,7 +6,7 @@
         {{ title }}
       </p>
       <p class="mb-3 font-normal text-gray-700">ID Prodotto: {{ id }}</p>
-      <p class="mb-3 font-normal text-gray-700">Quantity: {{ quantity }}</p>
+      <p class="mb-3 font-normal text-gray-700">Quantità: {{ quantity }}</p>
       <p class="mb-3 font-normal text-gray-700">
         Prezzo unitario: {{ priceFormatted }}
       </p>

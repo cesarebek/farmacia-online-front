@@ -1,16 +1,16 @@
 <template>
   <div
     @click.self="this.$emit('closeDetails')"
-    class="z-10 fixed inset-0 overflow-hidden flex justify-center items-center"
+    class="z-20 fixed inset-0 overflow-hidden flex justify-center items-center"
     style="background: rgba(0,0,0,.7);"
   >
     <div class="w-3/4 h-3/4 bg-gray-200 rounded-xl p-5 fixed overflow-y-scroll">
       <div class="rounded-lg p-3 bg-gray-100 shadow-sm">
         <p class="text-2xl font-medium">Dettagli dell'ordine</p>
-        <div class="flex space-x-5 text-sm">
-          <p>Ordinato il {{ creation }}</p>
-          |
-          <p>Numero ordine: #{{ order.id }}</p>
+        <div class="flex text-sm">
+          <p class="mr-3">Ordinato il {{ creation }}</p>
+          -
+          <p class="ml-3">Numero ordine: #{{ order.id }}</p>
         </div>
         <div class="mt-5 text-md lg:w-1/3">
           <p class="font-semibold text-lg">Riepilogo Ordine</p>
@@ -67,7 +67,7 @@ export default {
       }).format(this.order.amount);
     },
     creation() {
-      return moment(this.order.created_at).format('D MMMM YYYY');
+      return moment(this.order.created_at).format('D MMMM YYYY, H:mm');
     },
   },
   methods: {
