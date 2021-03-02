@@ -13,11 +13,11 @@
       >
         Ti piace questo progetto? Inviami un messaggio a
         <span class="font-semibold">cesarebek1@gmail.com</span> per domande,
-        approfondimenti o semplimente un chiaccherata!
+        approfondimenti o semplimente una chiaccherata!
       </p>
     </div>
     <img
-      class="rounded-full w-1/2 lg:w-1/3"
+      class="rounded-full w-1/2 lg:w-1/3 mb-6"
       src="@/assets/images/foto_profilo.jpg"
       alt=""
     />

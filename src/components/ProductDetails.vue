@@ -11,7 +11,7 @@
         <!--Title-->
         <div class="flex justify-between items-center pb-3">
           <p class="text-md text-gray-500">Dettagli prodotto</p>
-          <div class="modal-close cursor-pointer z-50">
+          <div class="cursor-pointer z-50">
             <svg
               @click="this.$emit('closeDetails')"
               class="fill-current text-black"

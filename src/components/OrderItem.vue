@@ -36,7 +36,7 @@
         :quantity="product.pivot.quantity"
         :image="product.product_image"
         :title="product.title"
-        :id="this.id"
+        :id="product.id"
       />
     </div>
     <!-- FOOTER -->

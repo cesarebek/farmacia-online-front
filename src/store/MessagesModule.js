@@ -3,14 +3,17 @@ import axios from '@/axios';
 const MessagesModule = {
   state: {
     allMessages: [],
-    message: null,
+    contactMessage: null,
   },
   mutations: {
     setAllMessages(state, messages) {
       state.allMessages = messages;
     },
     setContactMessage(state, message) {
-      state.message = message;
+      state.contactMessage = message;
+    },
+    resetContactMessage(state) {
+      state.contactMessage = null;
     },
   },
   actions: {
@@ -27,10 +30,16 @@ const MessagesModule = {
       commit('setContactMessage', res.data.message);
       dispatch('loadMessages');
     },
+    resetContactMessage({ commit }) {
+      commit('resetContactMessage');
+    },
   },
   getters: {
     allMessages(state) {
       return state.allMessages;
+    },
+    contactMessage(state) {
+      return state.contactMessage;
     },
     getMessageById: (state) => (id) => {
       return state.allMessages.find((message) => message.id == id);

@@ -11,11 +11,11 @@
 
   <teleport to="body">
     <base-toast
-      v-if="userMessage || productMessage || cartMessage"
+      v-if="userMessage || productMessage || cartMessage || contactMessage"
       class="fixed top-10 right-10"
       @reset-message="resetMessage"
     >
-      {{ userMessage || productMessage || cartMessage }}
+      {{ userMessage || productMessage || cartMessage || contactMessage }}
     </base-toast>
   </teleport>
 </template>
@@ -26,7 +26,7 @@ import MobileNavigation from '@/components/MobileNavigation';
 
 export default {
   components: { Navigation, MobileNavigation },
-  async created() {
+  async mounted() {
     await this.$store.dispatch('tryLogin');
     try {
       await this.$store.dispatch('loadCategories');
@@ -45,12 +45,16 @@ export default {
     cartMessage() {
       return this.$store.getters.cartMessage;
     },
+    contactMessage() {
+      return this.$store.getters.contactMessage;
+    },
   },
   methods: {
     resetMessage() {
       this.$store.dispatch('resetUserMessage');
       this.$store.dispatch('resetProductMessage');
       this.$store.dispatch('resetCartMessage');
+      this.$store.dispatch('resetContactMessage');
     },
   },
 };

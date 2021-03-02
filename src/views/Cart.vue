@@ -80,8 +80,9 @@
             class="block p-2 text-gray-600 w-full text-sm"
             v-model="shipping"
           >
-            <option value="14.0">Spedizione Express - € 14.90</option>
-            <option value="9.90">Spedizione Standart - € 9.90</option>
+            <option value="0.00">Spedizione Express - € 0.00</option>
+            <option value="14.00" disabled>Spedizione Express - € 14.90</option>
+            <option value="9.90" disabled>Spedizione Standart - € 9.90</option>
           </select>
         </div>
 
@@ -130,7 +131,7 @@ export default {
       return this.$store.getters.itemsCounter;
     },
     bigTotal() {
-      return parseFloat(this.cartAmount) + parseFloat(this.shipping);
+      return this.cartAmount;
     },
     wordItem() {
       return this.itemsCounter === 1 ? 'Prodotto' : 'Prodotti';
